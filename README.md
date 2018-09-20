@@ -1,53 +1,26 @@
-# ${PROJECT_NAME}
-*A brief (max. 300 words) description of your project, what it is used for and why is it worth to use it. Main features.*
+# enrichment-progress
+This is a package that contains custom data type that allows to monitor enrichment progress of objects. This is an internal Divante project.
 
 **Table of Contents**
 
-- [${PROJECT_NAME}](#)
+- [enrichment-progress](#)
 	- [Compatibility](#compatibility)
-	- [Installing/Getting started](#installinggetting-started)
-	- [Developing](#developing)
-	- [Building](#building)
-	- [Deploying/Publishing](#deployingpublishing)
-	- [Features](#)
-		- [Feature 1](#)
-		- [Feature 2](#)
-		- [Feature 3](#)
-	- [Configuration](#)
-	- [Contributing](#)
-	- [Licensing](#)
-	- [Standards & Code Quality](#)
-	- [About Authors](#)
-
+	- [Installation](#installation)
+	- [Contributing](#contributing)
+    - [Licensing](#licensing)
+    - [Standards & Code Quality](#standards-code-quality)
+    - [About Authors](#about-authors)
+    
 ## Compatibility
-*What is the module compatible with?*
+Pimcore 5.4.0 and higher.
 
-
-## Installing/Getting started
-Follow steps in the https://gitlab.divante.pl/${PROJECT_NAME}/docker/blob/master/README.md
-
-## Developing
-*A brief intro about what a developer must do in order to start developing the project further.*
-
-## Building
-*If your project needs some additional steps for the developer to build the project after some code changes, state them here.*
-
-## Deploying/Publishing
-*In case there's some step you have to take that publishes this project to a server, this is the right time to state it.*
-
-## Features
-*What're all the features this project can perform?*
-
-### Feature 1
-### Feature 2
-### Feature 3
-
-## Configuration
-*Here you should write what are all of the configurations a user can enter when using the project.*
+## Installation
+```
+composer require divante/enrichment-progress
+```
 
 ## Contributing
-
-If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+This is an internal Divante project.
 
 ## Licensing
 The code in this project is licensed under the GPLv3 license.
@@ -56,8 +29,6 @@ The code in this project is licensed under the GPLv3 license.
 This module respects all Pimcore5 code quality rules and our own PHPCS and PHPMD rulesets.
 
 ## About Authors
-
-
 ![Divante-logo](http://divante.co/logo-HG.png "Divante")
 
 We are a Software House from Europe, existing from 2008 and employing about 150 people. Our core competencies are built around Magento, Pimcore and bespoke software projects (we love Symfony3, Node.js, Angular, React, Vue.js). We specialize in sophisticated integration projects trying to connect hardcore IT with good product design and UX.
