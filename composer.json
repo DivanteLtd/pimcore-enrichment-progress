@@ -1,0 +1,25 @@
+{
+  "name": "divante/enrichment-progress",
+  "type": "pimcore-bundle",
+  "license": "GPLv3",
+  "authors": [
+    {
+      "name": "Korneliusz Kirsz",
+      "email": "kkirsz@divante.co",
+      "homepage": "https://divante.co/",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Divante\\EnrichmentProgressBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "pimcore": {
+      "bundles": [
+        "Divante\\EnrichmentProgressBundle\\EnrichmentProgressBundle"
+      ]
+    }
+  }
+}
