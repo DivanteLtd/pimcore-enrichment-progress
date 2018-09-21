@@ -1,0 +1,39 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
+
+    enrichment_progress.enrichment_progress_handler.block:
+        class: Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler\BlockHandler
+        arguments: ['@enrichment_progress.enrichment_progress_handler_locator']
+
+    enrichment_progress.enrichment_progress_handler.classificationstore:
+        class: Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler\ClassificationstoreHandler
+        arguments: ['@enrichment_progress.enrichment_progress_handler_locator']
+
+    enrichment_progress.enrichment_progress_handler.general:
+        class: Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler\GeneralHandler
+
+    enrichment_progress.enrichment_progress_handler.localizedfields:
+        class: Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler\LocalizedfieldsHandler
+        arguments: ['@enrichment_progress.enrichment_progress_handler_locator']
+
+    enrichment_progress.enrichment_progress_handler_locator:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            -
+                block: '@enrichment_progress.enrichment_progress_handler.block'
+                classificationstore: '@enrichment_progress.enrichment_progress_handler.classificationstore'
+                general: '@enrichment_progress.enrichment_progress_handler.general'
+                localizedfields: '@enrichment_progress.enrichment_progress_handler.localizedfields'
+
+    Divante\EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService:
+        public: true
+        arguments: ['@enrichment_progress.enrichment_progress_handler_locator']

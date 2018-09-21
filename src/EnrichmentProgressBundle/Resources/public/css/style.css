@@ -1,0 +1,10 @@
+/**
+ * @category    enrichment-progress
+ * @date        20/09/2018 13:46
+ * @author      Korneliusz Kirsz <kkirsz@divante.co>
+ * @copyright   Copyright (c) 2018 Divante Ltd. (https://divante.co/)
+ */
+
+.pimcore_icon_enrichmentProgress {
+    background: url(/pimcore/static6/img/flat-color-icons/calculator.svg) center center no-repeat !important;
+}
