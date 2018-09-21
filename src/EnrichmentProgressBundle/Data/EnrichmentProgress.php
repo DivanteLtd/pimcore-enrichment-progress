@@ -50,5 +50,7 @@ class EnrichmentProgress extends CalculatedValue
         if (is_int($data)) {
             return $data / 100;
         }
+
+        return null;
     }
 }

@@ -53,5 +53,7 @@ trait ServiceLocatorAwareTrait
             $id = $this->getServiceLocator()->has($field->getFieldtype()) ? $field->getFieldtype() : $defaultId;
             return $this->getServiceLocator()->get($id);
         }
+
+        return null;
     }
 }
