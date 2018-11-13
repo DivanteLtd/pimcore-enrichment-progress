@@ -10,6 +10,10 @@
       "role": "Developer"
     }
   ],
+  "require": {
+      "php": ">=7.1",
+      "pimcore/pimcore": "^5.4"
+  },
   "autoload": {
     "psr-4": {
       "Divante\\EnrichmentProgressBundle\\": "src/"
