@@ -20,10 +20,10 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
             <exclude>
-                <directory>src/EtimBundle/DependencyInjection</directory>
-                <directory>src/EtimBundle/Migrations</directory>
-                <directory>src/EtimBundle/Resources</directory>
-                <file>src/EtimBundle/DivanteEtimBundle.php</file>
+                <directory>src/EnrichmentProgressBundle/DependencyInjection</directory>
+                <directory>src/EnrichmentProgressBundle/Migrations</directory>
+                <directory>src/EnrichmentProgressBundle/Resources</directory>
+                <file>src/EnrichmentProgressBundle/DivanteEnrichmentProgressBundle.php</file>
             </exclude>
         </whitelist>
     </filter>
