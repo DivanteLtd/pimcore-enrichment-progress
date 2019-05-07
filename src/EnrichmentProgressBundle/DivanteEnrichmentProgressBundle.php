@@ -15,7 +15,7 @@ use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
  * Class EnrichmentProgressBundle
  * @package Divante\EnrichmentProgressBundle
  */
-class EnrichmentProgressBundle extends AbstractPimcoreBundle
+class DivanteEnrichmentProgressBundle extends AbstractPimcoreBundle
 {
     use PackageVersionTrait;
 
