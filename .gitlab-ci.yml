@@ -1,0 +1,86 @@
+image: php:7.2
+
+cache:
+    key: "${CI_PROJECT_ID}-${CI_JOB_NAME}"
+    paths:
+        - "vendor/"
+
+stages:
+    - analysis
+    - tests
+
+services:
+    - name: mysql:5.7
+      alias: mysql
+      command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --innodb-file-format=Barracuda, --innodb_large_prefix=1]
+
+variables:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: pimcore_test
+    CREATE_DB: "false"
+    DB_HOST: mysql
+    DB_PORT: ""
+    PIMCORE_ENVIRONMENT: test
+    PIMCORE_TEST: "1"
+    PIMCORE_TEST_DB_DSN: mysql://root:root@mysql/pimcore_test
+
+before_script:
+    - apt-get update -qq
+    - apt-get install -qq -y git libpng-dev zlib1g-dev libicu-dev g++ zlib1g-dev zip
+    - docker-php-ext-install exif gd intl mysqli pdo pdo_mysql zip opcache
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php --install-dir=/usr/bin --filename=composer
+    - php -r "unlink('composer-setup.php');"
+
+### Analysis
+
+phpcs:
+    stage: analysis
+    script:
+        - composer global require "divante-ltd/pimcore-coding-standards":"^0.1" --no-interaction --prefer-dist --ignore-platform-reqs --quiet
+        - /root/.composer/vendor/bin/phpcs --config-set colors 1
+        - /root/.composer/vendor/bin/phpcs --extensions=php --standard=/root/.composer/vendor/divante-ltd/pimcore-coding-standards/Standards/Pimcore5/ruleset.xml ./src  -s
+    allow_failure: true
+
+phpmd:
+    stage: analysis
+    script:
+        - composer global require "phpmd/phpmd":"^2.6" --no-interaction --prefer-dist --ignore-platform-reqs --quiet
+        - composer global require "divante-ltd/pimcore-coding-standards":"^0.1" --no-interaction --prefer-dist --ignore-platform-reqs --quiet
+        - /root/.composer/vendor/bin/phpmd src text /root/.composer/vendor/divante-ltd/pimcore-coding-standards/Standards/Pimcore5/rulesetmd.xml
+    allow_failure: true
+
+phpcpd:
+    stage: analysis
+    script:
+        - composer global require "sebastian/phpcpd":"^4.1" --no-interaction --prefer-dist --ignore-platform-reqs --quiet
+        - /root/.composer/vendor/bin/phpcpd src
+    allow_failure: true
+
+phpdocblock:
+    stage: analysis
+    script:
+        - composer global require "block8/php-docblock-checker":"^1.10" --no-interaction --prefer-dist --ignore-platform-reqs --quiet
+        - /root/.composer/vendor/bin/phpdoccheck --directory=src
+    allow_failure: true
+
+phploc:
+    stage: analysis
+    script:
+        - composer global require "phploc/phploc":"^4.0" --no-interaction --prefer-dist --ignore-platform-reqs --quiet
+        - /root/.composer/vendor/bin/phploc src
+    allow_failure: true
+
+### Tests
+
+unit_tests:
+    stage: tests
+    script:
+        - ./scripts/install.sh
+        - cd tmp/ && ./scripts/phpunit.sh
+
+functional_tests:
+    stage: tests
+    script:
+        - ./scripts/install.sh
+        - cd tmp/ && ./scripts/codecept.sh
