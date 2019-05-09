@@ -49,8 +49,8 @@ class DivanteEnrichmentProgressBundle extends AbstractPimcoreBundle
     public function getJsPaths()
     {
         return [
-            '/bundles/enrichmentprogress/js/pimcore/object/classes/data/enrichmentProgress.js',
-            '/bundles/enrichmentprogress/js/pimcore/object/tags/enrichmentProgress.js',
+            '/bundles/divanteenrichmentprogress/js/pimcore/object/classes/data/enrichmentProgress.js',
+            '/bundles/divanteenrichmentprogress/js/pimcore/object/tags/enrichmentProgress.js',
         ];
     }
 
