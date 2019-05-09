@@ -60,7 +60,7 @@ class DivanteEnrichmentProgressBundle extends AbstractPimcoreBundle
     public function getCssPaths()
     {
         return [
-            '/bundles/enrichmentprogress/css/style.css',
+            '/bundles/divanteenrichmentprogress/css/style.css',
         ];
     }
 }
