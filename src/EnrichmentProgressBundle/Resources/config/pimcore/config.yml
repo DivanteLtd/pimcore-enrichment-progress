@@ -1,6 +1,0 @@
-pimcore:
-    objects:
-        class_definitions:
-            data:
-                map:
-                    enrichmentProgress: \Divante\EnrichmentProgressBundle\Data\EnrichmentProgress
