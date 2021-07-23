@@ -8,10 +8,10 @@
 
 declare(strict_types=1);
 
-namespace Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler;
+namespace EnrichmentProgressBundle\EnrichmentProgress\Handler;
 
-use Divante\EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
-use Divante\EnrichmentProgressBundle\Model\EnrichmentProgress;
+use EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
+use EnrichmentProgressBundle\Model\EnrichmentProgress;
 use Pimcore\Model\DataObject\ClassDefinition\Data;
 use Pimcore\Model\DataObject\Classificationstore;
 use Symfony\Component\DependencyInjection\ServiceLocator;

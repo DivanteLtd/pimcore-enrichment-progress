@@ -6,15 +6,11 @@
  * @copyright   Copyright (c) 2018 Divante Ltd. (https://divante.co/)
  */
 
-namespace Divante\EnrichmentProgressBundle\DependencyInjection;
+namespace EnrichmentProgressBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * Class Configuration
- * @package Divante\EnrichmentProgressBundle\DependencyInjection
- */
 class Configuration implements ConfigurationInterface
 {
     /**

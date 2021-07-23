@@ -8,16 +8,12 @@
 
 declare(strict_types=1);
 
-namespace Divante\EnrichmentProgressBundle\Data;
+namespace EnrichmentProgressBundle\Data;
 
-use Divante\EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService;
+use EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService;
 use Pimcore\Model\DataObject\Data\CalculatedValue;
 use Pimcore\Model\DataObject\Concrete;
 
-/**
- * Class EnrichmentProgressCalculator
- * @package Divante\EnrichmentProgressBundle\Data
- */
 class EnrichmentProgressCalculator
 {
     /**
@@ -28,7 +24,7 @@ class EnrichmentProgressCalculator
     public static function compute(Concrete $object, CalculatedValue $context): int
     {
         /** @var EnrichmentProgressService $service */
-        $service = \Pimcore::getContainer()->get(EnrichmentProgressService::class);
+        $service = \Pimcore::getContainer()->get(EnrichmentProgressService\::class);
 
         return $service->getEnrichmentProgress($object)->getValueInPercent();
     }

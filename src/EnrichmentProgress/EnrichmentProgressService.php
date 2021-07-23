@@ -8,19 +8,15 @@
 
 declare(strict_types=1);
 
-namespace Divante\EnrichmentProgressBundle\EnrichmentProgress;
+namespace EnrichmentProgressBundle\EnrichmentProgress;
 
-use Divante\EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
-use Divante\EnrichmentProgressBundle\Model\EnrichmentProgress;
+use EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
+use EnrichmentProgressBundle\Model\EnrichmentProgress;
 use Pimcore\Model\DataObject\ClassDefinition\Data;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Concrete;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-/**
- * Class EnrichmentProgressService
- * @package Divante\EnrichmentProgressBundle\EnrichmentProgress
- */
 class EnrichmentProgressService implements DependencyInjection\ServiceLocatorAwareInterface
 {
     use DependencyInjection\ServiceLocatorAwareTrait;

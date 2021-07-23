@@ -8,17 +8,13 @@
 
 declare(strict_types=1);
 
-namespace Divante\EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
+namespace EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
 
 use Divante\EnrichmentProgressBundle\Data\EnrichmentProgress;
 use Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler\HandlerInterface;
 use Pimcore\Model\DataObject\ClassDefinition\Data;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-/**
- * Trait ServiceLocatorAwareTrait
- * @package Divante\EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection
- */
 trait ServiceLocatorAwareTrait
 {
     /**

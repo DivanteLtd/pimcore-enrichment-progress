@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler;
+namespace EnrichmentProgressBundle\EnrichmentProgress\Handler;
 
-use Divante\EnrichmentProgressBundle\Model\EnrichmentProgress;
+use EnrichmentProgressBundle\Model\EnrichmentProgress;
 use Pimcore\Model\DataObject\ClassDefinition\Data;
 
 /**

@@ -6,17 +6,13 @@
  * @copyright   Copyright (c) 2018 Divante Ltd. (https://divante.co/)
  */
 
-namespace Divante\EnrichmentProgressBundle\DependencyInjection;
+namespace EnrichmentProgressBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * Class EnrichmentProgressExtension
- * @package Divante\EnrichmentProgressBundle\DependencyInjection
- */
 class EnrichmentProgressExtension extends Extension
 {
     /**

@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Divante\EnrichmentProgressBundle\Model;
+namespace EnrichmentProgressBundle\Model;
 
 /**
  * Class EnrichmentProgress

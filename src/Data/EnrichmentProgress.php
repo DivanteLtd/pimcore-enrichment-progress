@@ -6,14 +6,10 @@
  * @copyright   Copyright (c) 2018 Divante Ltd. (https://divante.co/)
  */
 
-namespace Divante\EnrichmentProgressBundle\Data;
+namespace EnrichmentProgressBundle\Data;
 
 use Pimcore\Model\DataObject\ClassDefinition\Data\CalculatedValue;
 
-/**
- * Class EnrichmentProgress
- * @package Divante\EnrichmentProgressBundle\Data
- */
 class EnrichmentProgress extends CalculatedValue
 {
     /**

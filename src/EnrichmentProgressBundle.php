@@ -6,16 +6,12 @@
  * @copyright   Copyright (c) 2018 Divante Ltd. (https://divante.co/)
  */
 
-namespace Divante\EnrichmentProgressBundle;
+namespace EnrichmentProgressBundle;
 
 use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 
-/**
- * Class EnrichmentProgressBundle
- * @package Divante\EnrichmentProgressBundle
- */
-class DivanteEnrichmentProgressBundle extends AbstractPimcoreBundle
+class EnrichmentProgressBundle extends AbstractPimcoreBundle
 {
     use PackageVersionTrait;
 
@@ -24,7 +20,7 @@ class DivanteEnrichmentProgressBundle extends AbstractPimcoreBundle
      */
     public function getComposerPackageName(): string
     {
-        return 'divante/enrichment-progress';
+        return 'divante-ltd/pimcore-enrichment-progress';
     }
 
     /**
@@ -32,7 +28,7 @@ class DivanteEnrichmentProgressBundle extends AbstractPimcoreBundle
      */
     public function getNiceName()
     {
-        return 'Enrichment Progress';
+        return 'Enrichment Progress Bundle';
     }
 
     /**
@@ -51,6 +47,8 @@ class DivanteEnrichmentProgressBundle extends AbstractPimcoreBundle
         return [
             '/bundles/divanteenrichmentprogress/js/pimcore/object/classes/data/enrichmentProgress.js',
             '/bundles/divanteenrichmentprogress/js/pimcore/object/tags/enrichmentProgress.js',
+            '/bundles/divanteenrichmentprogress/js/pimcore/startup.js',
+            '/bundles/divanteenrichmentprogress/js/pimcore/progressbar.js',
         ];
     }
 

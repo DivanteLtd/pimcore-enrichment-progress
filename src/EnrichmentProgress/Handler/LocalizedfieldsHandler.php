@@ -8,24 +8,20 @@
 
 declare(strict_types=1);
 
-namespace Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler;
+namespace EnrichmentProgressBundle\EnrichmentProgress\Handler;
 
-use Divante\EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
-use Divante\EnrichmentProgressBundle\Model\EnrichmentProgress;
+use EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
+use EnrichmentProgressBundle\Model\EnrichmentProgress;
 use Pimcore\Model\DataObject\ClassDefinition\Data;
-use Pimcore\Model\DataObject\Data\BlockElement;
+use Pimcore\Model\DataObject\Localizedfield;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-/**
- * Class BlockHandler
- * @package Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler
- */
-class BlockHandler implements HandlerInterface, DependencyInjection\ServiceLocatorAwareInterface
+class LocalizedfieldsHandler implements HandlerInterface, DependencyInjection\ServiceLocatorAwareInterface
 {
     use DependencyInjection\ServiceLocatorAwareTrait;
 
     /**
-     * BlockHandler constructor.
+     * LocalizedfieldsHandler constructor.
      * @param ServiceLocator $serviceLocator
      */
     public function __construct(ServiceLocator $serviceLocator)
@@ -34,29 +30,25 @@ class BlockHandler implements HandlerInterface, DependencyInjection\ServiceLocat
     }
 
     /**
-     * @param Data\Block $field
-     * @param array|null $data
+     * @param Data\Localizedfields $field
+     * @param Localizedfield $data
      * @return EnrichmentProgress
      */
     public function getEnrichmentProgress(Data $field, $data): EnrichmentProgress
     {
-        if (!$field instanceof Data\Block) {
+        if (!$field instanceof Data\Localizedfields) {
             throw new \InvalidArgumentException(sprintf(
                 "Field must be '%s', '%s' given",
-                Data\Block::class,
+                Data\Localizedfields::class,
                 get_class($field)
             ));
         }
 
-        if (is_null($data)) {
-            $data = [];
-        }
-
-        if (!is_array($data)) {
+        if (!$data instanceof Localizedfield) {
             throw new \InvalidArgumentException(sprintf(
                 "Data must be '%s', '%s' given",
-                'array',
-                gettype($data)
+                Localizedfield::class,
+                is_object($data) ? get_class($data) : gettype($data)
             ));
         }
 
@@ -64,22 +56,23 @@ class BlockHandler implements HandlerInterface, DependencyInjection\ServiceLocat
     }
 
     /**
-     * @param Data\Block $field
-     * @param array $data
+     * @param Data\Localizedfields $field
+     * @param Localizedfield $data
      * @return EnrichmentProgress
      */
-    protected function checkEnrichmentProgress(Data\Block $field, array $data): EnrichmentProgress
+    protected function checkEnrichmentProgress(Data\Localizedfields $field, Localizedfield $data): EnrichmentProgress
     {
         $progress = new EnrichmentProgress();
 
+        $languages = $this->getLanguages();
         foreach ($this->getChildren($field) as $child) {
             $handler = $this->getHandler($child);
             if ($handler) {
-                $name = $child->getName();
-                foreach ($data as $block) {
-                    /** @var BlockElement $element */
-                    $element = $block[$name];
-                    $progress = $progress->add($handler->getEnrichmentProgress($child, $element->getData()));
+                foreach ($languages as $language) {
+                    $progress = $progress->add($handler->getEnrichmentProgress(
+                        $child,
+                        $data->getLocalizedValue($child->getName(), $language, true)
+                    ));
                 }
             }
         }
@@ -88,11 +81,19 @@ class BlockHandler implements HandlerInterface, DependencyInjection\ServiceLocat
     }
 
     /**
-     * @param Data\Block $field
+     * @param Data\Localizedfields $field
      * @return Data[]
      */
-    protected function getChildren(Data\Block $field): array
+    protected function getChildren(Data\Localizedfields $field): array
     {
         return $field->getFieldDefinitions(['suppressEnrichment' => true]);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getLanguages(): array
+    {
+        return \Pimcore\Tool::getValidLanguages();
     }
 }
