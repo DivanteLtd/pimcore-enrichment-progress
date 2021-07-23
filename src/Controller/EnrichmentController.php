@@ -9,9 +9,10 @@ declare(strict_types=1);
 
 namespace EnrichmentProgressBundle\Controller;
 
-use EnrichmentProgressBundle\Service\EnrichmentService;
+use EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService;
 use Pimcore\Bundle\AdminBundle\Controller\AdminController;
 use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
+use Pimcore\Model\DataObject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -29,9 +30,9 @@ class EnrichmentController extends AdminController
     private $service;
 
     /**
-     * @param EnrichmentService $service
+     * @param EnrichmentProgressService $service
      */
-    public function __construct(EnrichmentService $service)
+    public function __construct(EnrichmentProgressService $service)
     {
         $this->service = $service;
     }
@@ -45,12 +46,18 @@ class EnrichmentController extends AdminController
      */
     public function progressAction(string $id): JsonResponse
     {
-        $object = $this->service->getObject((int) $id);
-        $progress = $this->service->getProgress($object);
+        $object = DataObject::getById($id);
+        if (!$object) {
+            return $this->adminJson([
+                'completed' => 0,
+                'total' => 0,
+            ]);
+        }
+        $progress = $this->service->getEnrichmentProgress($object);
 
         return $this->adminJson([
-            'completed' => $progress->completed(),
-            'total' => $progress->total(),
+            'completed' => $progress->getCompleted(),
+            'total' => $progress->getTotal(),
         ]);
     }
 }
