@@ -1,0 +1,5 @@
+pimcore_enrichment:
+    resource: "@EnrichmentProgressBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+

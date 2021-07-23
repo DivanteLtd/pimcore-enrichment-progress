@@ -45,10 +45,10 @@ class EnrichmentProgressBundle extends AbstractPimcoreBundle
     public function getJsPaths()
     {
         return [
-            '/bundles/divanteenrichmentprogress/js/pimcore/object/classes/data/enrichmentProgress.js',
-            '/bundles/divanteenrichmentprogress/js/pimcore/object/tags/enrichmentProgress.js',
-            '/bundles/divanteenrichmentprogress/js/pimcore/startup.js',
-            '/bundles/divanteenrichmentprogress/js/pimcore/progressbar.js',
+            '/bundles/enrichmentprogress/js/pimcore/object/classes/data/enrichmentProgress.js',
+            '/bundles/enrichmentprogress/js/pimcore/object/tags/enrichmentProgress.js',
+            '/bundles/enrichmentprogress/js/pimcore/startup.js',
+            '/bundles/enrichmentprogress/js/pimcore/progressbar.js',
         ];
     }
 
@@ -58,7 +58,7 @@ class EnrichmentProgressBundle extends AbstractPimcoreBundle
     public function getCssPaths()
     {
         return [
-            '/bundles/divanteenrichmentprogress/css/style.css',
+            '/bundles/enrichmentprogress/css/style.css',
         ];
     }
 }

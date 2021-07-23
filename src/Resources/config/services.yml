@@ -9,19 +9,24 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
+    EnrichmentProgressBundle\Controller\:
+        resource: '../../Controller'
+        public: true
+        tags: [ 'controller.service_arguments' ]
+
     enrichment_progress.enrichment_progress_handler.block:
-        class: Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler\BlockHandler
+        class: EnrichmentProgressBundle\EnrichmentProgress\Handler\BlockHandler
         arguments: ['@enrichment_progress.enrichment_progress_handler_locator']
 
     enrichment_progress.enrichment_progress_handler.classificationstore:
-        class: Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler\ClassificationstoreHandler
+        class: EnrichmentProgressBundle\EnrichmentProgress\Handler\ClassificationstoreHandler
         arguments: ['@enrichment_progress.enrichment_progress_handler_locator']
 
     enrichment_progress.enrichment_progress_handler.general:
-        class: Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler\GeneralHandler
+        class: EnrichmentProgressBundle\EnrichmentProgress\Handler\GeneralHandler
 
     enrichment_progress.enrichment_progress_handler.localizedfields:
-        class: Divante\EnrichmentProgressBundle\EnrichmentProgress\Handler\LocalizedfieldsHandler
+        class: EnrichmentProgressBundle\EnrichmentProgress\Handler\LocalizedfieldsHandler
         arguments: ['@enrichment_progress.enrichment_progress_handler_locator']
 
     enrichment_progress.enrichment_progress_handler_locator:
@@ -34,6 +39,6 @@ services:
                 general: '@enrichment_progress.enrichment_progress_handler.general'
                 localizedfields: '@enrichment_progress.enrichment_progress_handler.localizedfields'
 
-    Divante\EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService:
+    EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService:
         public: true
         arguments: ['@enrichment_progress.enrichment_progress_handler_locator']

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace EnrichmentProgressBundle\Data;
 
 use EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService;
+use EnrichmentProgressBundle\Service\EnrichmentService;
 use Pimcore\Model\DataObject\Data\CalculatedValue;
 use Pimcore\Model\DataObject\Concrete;
 
@@ -24,7 +25,7 @@ class EnrichmentProgressCalculator
     public static function compute(Concrete $object, CalculatedValue $context): int
     {
         /** @var EnrichmentProgressService $service */
-        $service = \Pimcore::getContainer()->get(EnrichmentProgressService\::class);
+        $service = \Pimcore::getContainer()->get(EnrichmentProgressService::class);
 
         return $service->getEnrichmentProgress($object)->getValueInPercent();
     }

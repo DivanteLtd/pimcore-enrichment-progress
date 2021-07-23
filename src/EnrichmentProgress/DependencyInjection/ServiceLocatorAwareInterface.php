@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Divante\EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
+namespace EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ServiceLocator;
 

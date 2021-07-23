@@ -7,7 +7,7 @@
 
 pimcore.registerNS("pimcore.plugin.PimcoreEnrichmentBundle");
 
-pimcore.plugin.DivanteEnrichmentBundle = Class.create(pimcore.plugin.admin, {
+pimcore.plugin.PimcoreEnrichmentBundle = Class.create(pimcore.plugin.admin, {
     getClassName: function () {
         return "pimcore.plugin.PimcoreEnrichmentBundle";
     },
