@@ -1,7 +1,5 @@
 # Enrichment Progress
 This is a package that contains custom data type that allows to monitor enrichment progress of objects.
-This is an internal Divante project 
-([read more](https://divante.atlassian.net/wiki/spaces/KPWP/pages/805208115/Enrichment+Progress)).
 
 **Table of Contents**
 
