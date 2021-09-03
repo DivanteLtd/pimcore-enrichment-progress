@@ -33,6 +33,13 @@ pimcore.object.classes.data.enrichmentProgress = Class.create(pimcore.object.cla
                 name: 'width',
                 value: this.datax.width,
                 labelWidth: 140
+            },
+            {
+                xtype: "numberfield",
+                fieldLabel: t("columnlength"),
+                name: "columnLength",
+                value: this.datax.columnLength,
+                labelWidth: 140
             }
         ]);
 
@@ -40,8 +47,5 @@ pimcore.object.classes.data.enrichmentProgress = Class.create(pimcore.object.cla
     },
 
     applySpecialData: function(source) {
-        if (source.datax && !this.datax) {
-            this.datax = {};
-        }
     }
 });

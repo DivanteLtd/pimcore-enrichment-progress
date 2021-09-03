@@ -35,7 +35,7 @@ pimcore.plugin.PimcoreEnrichmentBundle = Class.create(pimcore.plugin.admin, {
     },
 
     showProgress: function (object) {
-        return object.workflows !== undefined;
+        return object.preview !== undefined;
     }
 });
 

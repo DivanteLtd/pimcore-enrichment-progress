@@ -11,33 +11,37 @@ pimcore.object.tags.enrichmentProgress = Class.create(pimcore.object.tags.calcul
 
     type: 'enrichmentProgress',
 
-    getLayoutEdit: function () {
-
-        this.component = new Ext.ProgressBar({
-            componentCls: 'object_field',
-            disabled: true,
-            textTpl: this.fieldConfig.title + ': {percent:number("0")}%',
-            width: this.fieldConfig.width ? this.fieldConfig.width : 350
-        });
-
-        var value = this.data ? this.data / 100 : 0;
-        this.component.updateProgress(value);
-
-        return this.component;
-    },
-
     getGridColumnConfig: function (field) {
+        var renderer = function (key, value, metaData, record) {
+            this.applyPermissionStyle(key, value, metaData, record);
+
+            try {
+                if (record.data.inheritedFields && record.data.inheritedFields[key] && record.data.inheritedFields[key].inherited == true) {
+                    metaData.tdCls += " grid_value_inherited";
+                }
+            } catch (e) {
+                console.log(e);
+            }
+            return value;
+
+        }.bind(this, field.key);
+
         return {
-            text: ts(field.label),
+            header: ts(field.label),
             sortable: true,
             dataIndex: field.key,
+            renderer: renderer,
             xtype: 'widgetcolumn',
             widget: {
                 xtype: 'progressbarwidget',
-                textTpl: '{percent:number("0")}%'
-            }
+                textTpl: [
+                    '{percent:number("0")}%'
+                ]
+            },
+            editor: this.getGridColumnEditor(field)
         };
     },
+
 
     getGridColumnFilter: function (field) {
         return {
