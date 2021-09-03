@@ -1,6 +1,15 @@
 # Enrichment Progress
 This is a package that contains custom data type that allows to monitor enrichment progress of objects.
 
+It calculates the progress based on mandatory fields and displays it on top of the object editor:
+
+![editor](docs/object.png)
+
+and in the grid:
+
+![grid](docs/grid.png)
+
+
 **Table of Contents**
 
 - [Enrichment Progress](#enrichment-progress)
@@ -24,6 +33,8 @@ Enable the Bundle:
 ./bin/console pimcore:bundle:enable DivanteEnrichmentProgressBundle
 ```
 
+After those steps, you should find a new data type called "Enrichment Progress" in the classes editor under Other section.
+
 ## Testing
 Unit Tests:
 ```bash
@@ -39,22 +50,3 @@ PIMCORE_TEST_DB_DSN="mysql://username:password@localhost/pimcore_test" \
 
 ## Contributing
 If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
-
-## Standards & Code Quality
-This module respects all Pimcore 5 code quality rules and our own PHPCS and PHPMD rulesets.
-
-## About Authors
-![Divante-logo](http://divante.co/logo-HG.png "Divante")
-
-We are a Software House from Europe, existing from 2008 and employing about 150 people. Our core competencies are built 
-around Magento, Pimcore and bespoke software projects (we love Symfony3, Node.js, Angular, React, Vue.js). 
-We specialize in sophisticated integration projects trying to connect hardcore IT with good product design and UX.
-
-We work for Clients like INTERSPORT, ING, Odlo, Onderdelenwinkel and CDP, the company that produced The Witcher game. 
-We develop two projects: [Open Loyalty](http://www.openloyalty.io/ "Open Loyalty") - an open source loyalty program 
-and [Vue.js Storefront](https://github.com/DivanteLtd/vue-storefront "Vue.js Storefront").
-
-We are part of the OEX Group which is listed on the Warsaw Stock Exchange. Our annual revenue has been growing at a 
-minimum of about 30% year on year.
-
-Visit our website [Divante.co](https://divante.co/ "Divante.co") for more information.
