@@ -20,7 +20,7 @@ pimcore.plugin.PimcoreEnrichmentBundle = Class.create(pimcore.plugin.admin, {
     },
     
     postOpenObject: function (object, type) {
-        if (this.hasWorkflow(object)) {
+        if (this.showProgress(object)) {
             var key = 'progressbar_' + object.id;
             var value = new pimcore.plugin.PimcoreEnrichmentBundle.ProgressBar(object);
             pimcore.globalmanager.add(key, value);
@@ -28,14 +28,14 @@ pimcore.plugin.PimcoreEnrichmentBundle = Class.create(pimcore.plugin.admin, {
     },
     
     postSaveObject: function (object) {
-        if (this.hasWorkflow(object)) {
+        if (this.showProgress(object)) {
             var key = 'progressbar_' + object.id;
             pimcore.globalmanager.get(key).refreshProgress();
         }
     },
 
-    hasWorkflow: function (object) {
-        return true;
+    showProgress: function (object) {
+        return object.workflows !== undefined;
     }
 });
 
