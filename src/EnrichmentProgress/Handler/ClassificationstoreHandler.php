@@ -97,7 +97,11 @@ class ClassificationstoreHandler implements HandlerInterface, DependencyInjectio
 
         foreach ($data->getActiveGroups() as $id => $enabled) {
             if ((bool) $enabled) {
-                $groups[] = $this->getGroupById((int) $id);
+                try {
+                    $groups[] = $this->getGroupById((int) $id);
+                } catch (\UnexpectedValueException $e) {
+                    continue;
+                }
             }
         }
 
