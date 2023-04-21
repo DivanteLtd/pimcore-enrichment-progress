@@ -20,12 +20,12 @@ class EnrichmentProgress extends CalculatedValue
     /**
      * @var string
      */
-    public $calculatorClass = EnrichmentProgressCalculator::class;
-
-    /**
-     * @var string
-     */
     public $queryColumnType = 'tinyint';
+
+    public function __construct()
+    {
+        parent::setCalculatorClass(EnrichmentProgressCalculator::class);
+    }
 
     /**
      * @return string
