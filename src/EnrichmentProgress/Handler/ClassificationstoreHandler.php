@@ -14,6 +14,7 @@ use EnrichmentProgressBundle\EnrichmentProgress\DependencyInjection;
 use EnrichmentProgressBundle\Model\EnrichmentProgress;
 use Pimcore\Model\DataObject\ClassDefinition\Data;
 use Pimcore\Model\DataObject\Classificationstore;
+use Pimcore\Tool;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
 class ClassificationstoreHandler implements HandlerInterface, DependencyInjection\ServiceLocatorAwareInterface
@@ -66,7 +67,7 @@ class ClassificationstoreHandler implements HandlerInterface, DependencyInjectio
     ): EnrichmentProgress {
         $progress = new EnrichmentProgress();
 
-        $languages = $field->getValidLanguages();
+        $languages = Tool::getValidLanguages();
         foreach ($this->getGroups($data) as $group) {
             /** @var Classificationstore\KeyGroupRelation[] $relations */
             $relations = $group->getRelations();
@@ -74,11 +75,13 @@ class ClassificationstoreHandler implements HandlerInterface, DependencyInjectio
                 $child = $this->getChild($relation);
                 $handler = $this->getHandler($child);
                 if ($handler) {
-                    foreach ($languages as $language) {
-                        $progress = $progress->add($handler->getEnrichmentProgress(
-                            $child,
-                            $this->getLocalizedKeyValue($data, $relation, $language)
-                        ));
+                    if ($field->isLocalized()) {
+                        foreach ($languages as $language) {
+                            $progress = $progress->add($handler->getEnrichmentProgress(
+                                $child,
+                                $this->getLocalizedKeyValue($data, $relation, $language)
+                            ));
+                        }
                     }
                 }
             }
