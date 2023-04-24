@@ -13,19 +13,18 @@ use EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService;
 use Pimcore\Bundle\AdminBundle\Controller\AdminController;
 use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
 use Pimcore\Model\DataObject;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class EnrichmentController
  *
  * @package Divante\EnrichmentBundle\Controller
- * @Route("/enrichment")
  */
+#[Route('/enrichment')]
 class EnrichmentController extends AdminController
 {
     /**
-     * @var EnrichmentService
+     * @var EnrichmentProgressService
      */
     private $service;
 
@@ -37,13 +36,8 @@ class EnrichmentController extends AdminController
         $this->service = $service;
     }
 
-    /**
-     * @param string $id
-     *
-     * @return JsonResponse
-     * @Route("/progress/{id}", requirements={"id": "[1-9][0-9]*"})
-     * @Method({"GET"})
-     */
+
+    #[Route('/progress/{id}', requirements: ['id' => '[1-9][0-9]*'])]
     public function progressAction(string $id): JsonResponse
     {
         $object = DataObject::getById($id);

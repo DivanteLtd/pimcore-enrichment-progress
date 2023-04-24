@@ -18,8 +18,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('enrichment_progress');
+        $treeBuilder = new TreeBuilder('enrichment_progress');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

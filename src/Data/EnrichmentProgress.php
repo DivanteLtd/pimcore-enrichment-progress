@@ -20,12 +20,12 @@ class EnrichmentProgress extends CalculatedValue
     /**
      * @var string
      */
-    public $calculatorClass = EnrichmentProgressCalculator::class;
-
-    /**
-     * @var string
-     */
     public $queryColumnType = 'tinyint';
+
+    public function __construct()
+    {
+        parent::setCalculatorClass(EnrichmentProgressCalculator::class);
+    }
 
     /**
      * @return string
@@ -48,7 +48,7 @@ class EnrichmentProgress extends CalculatedValue
      */
     public function getDataForGrid($data, $object = null, $params = [])
     {
-        if (is_int($data)) {
+        if (is_numeric($data)) {
             return $data / 100;
         }
 
