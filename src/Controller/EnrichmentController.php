@@ -23,14 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/enrichment')]
 class EnrichmentController extends FrontendController
 {
-    /**
-     * @var EnrichmentProgressService
-     */
     private EnrichmentProgressService $service;
 
-    /**
-     * @param EnrichmentProgressService $service
-     */
     public function __construct(EnrichmentProgressService $service)
     {
         $this->service = $service;
