@@ -3,14 +3,13 @@
 namespace Tests\Unit\Divante\EnrichmentProgressBundle\Controller;
 
 use Pimcore\Test\WebTestCase;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 class DefaultControllerTest extends WebTestCase
 {
-    /** @var Client $client */
-    private $client;
+    private KernelBrowser $client;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->client = static::createClient();
     }
