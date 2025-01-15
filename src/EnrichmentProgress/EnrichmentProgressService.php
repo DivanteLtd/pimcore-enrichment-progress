@@ -70,7 +70,7 @@ class EnrichmentProgressService implements DependencyInjection\ServiceLocatorAwa
      * @param Data $field
      * @return mixed
      */
-    protected function getValue(Concrete $object, Data $field)
+    protected function getValue(Concrete $object, Data $field): mixed
     {
         $name = $field->getName();
         $getter = 'get' . ucfirst($name);

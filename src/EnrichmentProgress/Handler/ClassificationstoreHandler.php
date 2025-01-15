@@ -69,19 +69,16 @@ class ClassificationstoreHandler implements HandlerInterface, DependencyInjectio
 
         $languages = Tool::getValidLanguages();
         foreach ($this->getGroups($data) as $group) {
-            /** @var Classificationstore\KeyGroupRelation[] $relations */
             $relations = $group->getRelations();
             foreach ($relations as $relation) {
                 $child = $this->getChild($relation);
                 $handler = $this->getHandler($child);
-                if ($handler) {
-                    if ($field->isLocalized()) {
-                        foreach ($languages as $language) {
-                            $progress = $progress->add($handler->getEnrichmentProgress(
-                                $child,
-                                $this->getLocalizedKeyValue($data, $relation, $language)
-                            ));
-                        }
+                if ($handler && $field->isLocalized()) {
+                    foreach ($languages as $language) {
+                        $progress = $progress->add($handler->getEnrichmentProgress(
+                            $child,
+                            $this->getLocalizedKeyValue($data, $relation, $language)
+                        ));
                     }
                 }
             }
@@ -154,7 +151,7 @@ class ClassificationstoreHandler implements HandlerInterface, DependencyInjectio
         Classificationstore $data,
         Classificationstore\KeyGroupRelation $relation,
         string $language
-    ) {
+    ): mixed {
         return $data->getLocalizedKeyValue(
             $relation->getGroupId(),
             $relation->getKeyId(),

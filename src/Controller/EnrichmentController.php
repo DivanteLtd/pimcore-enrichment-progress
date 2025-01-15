@@ -10,9 +10,9 @@ declare(strict_types=1);
 namespace EnrichmentProgressBundle\Controller;
 
 use EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService;
-use Pimcore\Bundle\AdminBundle\Controller\AdminController;
-use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
+use Pimcore\Controller\FrontendController;
 use Pimcore\Model\DataObject;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,12 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package Divante\EnrichmentBundle\Controller
  */
 #[Route('/enrichment')]
-class EnrichmentController extends AdminController
+class EnrichmentController extends FrontendController
 {
     /**
      * @var EnrichmentProgressService
      */
-    private $service;
+    private EnrichmentProgressService $service;
 
     /**
      * @param EnrichmentProgressService $service
@@ -42,14 +42,14 @@ class EnrichmentController extends AdminController
     {
         $object = DataObject::getById($id);
         if (!$object) {
-            return $this->adminJson([
+            return $this->json([
                 'completed' => 0,
                 'total' => 0,
             ]);
         }
         $progress = $this->service->getEnrichmentProgress($object);
 
-        return $this->adminJson([
+        return $this->json([
             'completed' => $progress->getCompleted(),
             'total' => $progress->getTotal(),
         ]);
