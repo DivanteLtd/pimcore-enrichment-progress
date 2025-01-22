@@ -43,6 +43,7 @@ class GeneralHandler implements HandlerInterface
      * @param Data $field
      * @param $data
      * @return bool
+     * @throws \Exception
      */
     protected function isValid(Data $field, $data): bool
     {

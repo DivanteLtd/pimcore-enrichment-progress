@@ -10,52 +10,40 @@ declare(strict_types=1);
 namespace EnrichmentProgressBundle\Controller;
 
 use EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService;
-use Pimcore\Bundle\AdminBundle\Controller\AdminController;
-use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
+use Pimcore\Controller\FrontendController;
 use Pimcore\Model\DataObject;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class EnrichmentController
  *
  * @package Divante\EnrichmentBundle\Controller
- * @Route("/enrichment")
  */
-class EnrichmentController extends AdminController
+#[Route('/enrichment')]
+class EnrichmentController extends FrontendController
 {
-    /**
-     * @var EnrichmentService
-     */
-    private $service;
+    private EnrichmentProgressService $service;
 
-    /**
-     * @param EnrichmentProgressService $service
-     */
     public function __construct(EnrichmentProgressService $service)
     {
         $this->service = $service;
     }
 
-    /**
-     * @param string $id
-     *
-     * @return JsonResponse
-     * @Route("/progress/{id}", requirements={"id": "[1-9][0-9]*"})
-     * @Method({"GET"})
-     */
+
+    #[Route('/progress/{id}', requirements: ['id' => '[1-9][0-9]*'])]
     public function progressAction(string $id): JsonResponse
     {
         $object = DataObject::getById($id);
         if (!$object) {
-            return $this->adminJson([
+            return $this->json([
                 'completed' => 0,
                 'total' => 0,
             ]);
         }
         $progress = $this->service->getEnrichmentProgress($object);
 
-        return $this->adminJson([
+        return $this->json([
             'completed' => $progress->getCompleted(),
             'total' => $progress->getTotal(),
         ]);

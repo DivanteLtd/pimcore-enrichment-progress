@@ -11,22 +11,27 @@ declare(strict_types=1);
 namespace EnrichmentProgressBundle\Data;
 
 use EnrichmentProgressBundle\EnrichmentProgress\EnrichmentProgressService;
-use EnrichmentProgressBundle\Service\EnrichmentService;
+use Pimcore\Model\DataObject\ClassDefinition\CalculatorClassInterface;
 use Pimcore\Model\DataObject\Data\CalculatedValue;
 use Pimcore\Model\DataObject\Concrete;
 
-class EnrichmentProgressCalculator
+class EnrichmentProgressCalculator implements CalculatorClassInterface
 {
     /**
      * @param Concrete $object
      * @param CalculatedValue $context
-     * @return int
+     * @return string
      */
-    public static function compute(Concrete $object, CalculatedValue $context): int
+    public function compute(Concrete $object, CalculatedValue $context): string
     {
         /** @var EnrichmentProgressService $service */
         $service = \Pimcore::getContainer()->get(EnrichmentProgressService::class);
 
-        return $service->getEnrichmentProgress($object)->getValueInPercent();
+        return (string) $service->getEnrichmentProgress($object)->getValueInPercent();
+    }
+
+    public function getCalculatedValueForEditMode(Concrete $object, CalculatedValue $context): string
+    {
+        return $this->compute($object, $context);
     }
 }

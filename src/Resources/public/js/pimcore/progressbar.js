@@ -19,7 +19,7 @@ pimcore.plugin.PimcoreEnrichmentBundle.ProgressBar = Class.create({
         Ext.Ajax.request({
             url: '/admin/enrichment/progress/' + this.object.id,
             success: function (response) {
-                var data = Ext.decode(response.responseText);
+                const data = Ext.decode(response.responseText);
                 this.updateProgress(data.completed, data.total);
             }.bind(this)
         });        
@@ -28,8 +28,8 @@ pimcore.plugin.PimcoreEnrichmentBundle.ProgressBar = Class.create({
     updateProgress: function (completed, total) {
         completed = parseInt(completed);
         total = parseInt(total);
-        var value = total > 0 ? (completed / total) : 1;
-        var text = 'Enrichment progress: ' + completed + '/' + total;
+        const value = total > 0 ? (completed / total) : 1;
+        const text = 'Enrichment progress: ' + completed + '/' + total;
         this.getProgressBar().updateProgress(value, text);        
     },    
     
@@ -49,7 +49,7 @@ pimcore.plugin.PimcoreEnrichmentBundle.ProgressBar = Class.create({
                 pimcore.globalmanager.remove('progressbar_' + this.object.id);
             }.bind(this));
             
-            var toolbar = Ext.getCmp('object_toolbar_' + this.object.id);
+            let toolbar = Ext.getCmp('object_toolbar_' + this.object.id);
             toolbar.add(this.progressBar);
         }
         

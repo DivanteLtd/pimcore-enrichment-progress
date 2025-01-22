@@ -7,29 +7,34 @@
 
 pimcore.registerNS("pimcore.plugin.PimcoreEnrichmentBundle");
 
-pimcore.plugin.PimcoreEnrichmentBundle = Class.create(pimcore.plugin.admin, {
+pimcore.plugin.PimcoreEnrichmentBundle = Class.create({
     getClassName: function () {
         return "pimcore.plugin.PimcoreEnrichmentBundle";
     },
 
     initialize: function () {
-        pimcore.plugin.broker.registerPlugin(this);
+        document.addEventListener(pimcore.events.postOpenObject, this.postOpenObject.bind(this));
+        document.addEventListener(pimcore.events.postSaveObject, this.postSaveObject.bind(this));
     },
 
     pimcoreReady: function (params, broker) {
     },
     
-    postOpenObject: function (object, type) {
+    postOpenObject: function (event) {
+        const object = event.detail.object;
+
         if (this.showProgress(object)) {
-            var key = 'progressbar_' + object.id;
-            var value = new pimcore.plugin.PimcoreEnrichmentBundle.ProgressBar(object);
+            const key = 'progressbar_' + object.id;
+            const value = new pimcore.plugin.PimcoreEnrichmentBundle.ProgressBar(object);
             pimcore.globalmanager.add(key, value);
         }
     },
     
-    postSaveObject: function (object) {
+    postSaveObject: function (event) {
+        const object = event.detail.object;
+
         if (this.showProgress(object)) {
-            var key = 'progressbar_' + object.id;
+            const key = 'progressbar_' + object.id;
             pimcore.globalmanager.get(key).refreshProgress();
         }
     },
